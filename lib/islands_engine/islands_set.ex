@@ -13,6 +13,17 @@ defmodule IslandsEngine.IslandSet do
     |> Map.keys
   end
 
+  def to_string(island_set) do
+    "%IslandSet{" <> string_body(island_set) <> "}"
+  end
+
+  defp string_body(island_set) do
+    Enum.reduce(keys(), "", fn key, acc ->
+      island =  Agent.get(island_set, &(Map.fetch!(&1, key)));
+      acc <> "#{key} => " <> Island.to_string(island) <> "\n"
+    end)
+  end
+
   defp initialized_set do
     Enum.reduce(keys(), %IslandSet{}, fn key, set ->
       {:ok, island} = Island.start_link
