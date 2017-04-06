@@ -1,7 +1,9 @@
 defmodule IslandsEngine.Coordinate do
-  defstruct in_island: :none, guessed?: false
-
   alias IslandsEngine.Coordinate
+
+  # in_island => Holds the name of the island or :none
+  # guessed => Has the user guessed this coordinate?
+  defstruct in_island: :none, guessed?: false
 
   # Start a link with a new Agent whose state is a Coordinate instance
   def start_link() do
@@ -43,6 +45,6 @@ defmodule IslandsEngine.Coordinate do
 
   # Return the coordinate as a string
   def to_string(coordinate) do
-    "(in_island:#{in_island?(coordinate)}, guessed:#{guessed?(coordinate)})"
+    "(in_island:#{island(coordinate)}, guessed:#{guessed?(coordinate)})"
   end
 end
