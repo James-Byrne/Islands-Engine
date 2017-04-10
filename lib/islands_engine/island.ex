@@ -7,6 +7,7 @@ defmodule IslandsEngine.Island do
   end
 
   # Replace the coordinates of the island with anew list of coords
+  # This is passed coordinates from the Boards list of coordinates
   def replace_coordinates(island, new_coords) when is_list new_coords do
     Agent.update(island, fn _state -> new_coords end)
   end
